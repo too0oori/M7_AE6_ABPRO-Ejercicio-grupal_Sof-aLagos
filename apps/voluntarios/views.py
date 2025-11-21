@@ -3,8 +3,6 @@ from apps.voluntarios.models import Voluntario
 from apps.voluntarios.forms import VoluntarioForm
 
 # Create your views here.
-def index(request):
-    return render(request, 'voluntarios/index.html')
 
 def lista_voluntarios(request):
     voluntarios = Voluntario.objects.all()

@@ -2,9 +2,6 @@ from django.shortcuts import render, redirect
 from apps.eventos.models import Evento
 from apps.eventos.forms import EventoForm
 # Create your views here.
-def index(request):
-    return render(request, 'voluntarios/index.html')
-
 def lista_eventos(request):
     eventos = Evento.objects.all()
     return render(request, 'voluntarios/eventos_lista.html', {'eventos': eventos})

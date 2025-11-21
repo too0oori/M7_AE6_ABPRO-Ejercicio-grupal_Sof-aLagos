@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="p-5 mb-4 bg-light rounded-3 shadow-sm">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Gestor de Voluntariado y Eventos</h1>
+            <p class="col-md-8 fs-5 mt-3">
+                Bienvenido/a a la plataforma de administración de voluntarios y eventos de la ONG.
+                Aquí podrás gestionar a los voluntarios registrados, crear nuevos eventos comunitarios,
+                asignar participantes y mantener toda la información organizada.
+            </p>
+            <a class="btn btn-primary btn-lg mt-3" href="{% url 'voluntarios:lista_voluntarios' %}">
+                Ver Voluntarios &raquo;
+            </a>
+            <a class="btn btn-success btn-lg mt-3 ms-2" href="{% url 'eventos:lista_eventos' %}">
+                Ver Eventos &raquo;
+            </a>
+        </div>
+    </div>
+
+    <div class="row text-center mt-5">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">Voluntarios</h2>
+                    <p class="card-text">
+                        Administra la información de todas las personas inscritas para participar en actividades.
+                        Puedes crear, editar o eliminar voluntarios según sea necesario.
+                    </p>
+                    <a class="btn btn-outline-primary" href="{% url 'voluntarios:crear_voluntario' %}">
+                        Registrar Voluntario
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title">Eventos</h2>
+                    <p class="card-text">
+                        Crea nuevos eventos comunitarios, agrega descripciones, fechas y asigna voluntarios
+                        para cada actividad.
+                    </p>
+                    <a class="btn btn-outline-success" href="{% url 'eventos:crear_evento' %}">
+                        Crear Evento
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
