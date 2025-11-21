@@ -9,14 +9,12 @@ class EventoForm(forms.ModelForm):
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el título del evento.'}),
             'descripcion': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ingrese la descripción del evento.'}),
-            'fecha': forms.DateInput(attrs={'type': 'date ', 'class': 'form-control'}),
-            'voluntarios': forms.CheckboxSelectMultiple(),
+            'fecha': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
         }
         labels = {
             'titulo': 'Título',
             'descripcion': 'Descripción',
             'fecha': 'Fecha',
-            'voluntarios': 'Voluntarios',
         }
 
         error_messages = {

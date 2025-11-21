@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+
+    <h2 class="mb-4">
+        {% if form.instance.pk %}
+            Editar Voluntario
+        {% else %}
+            Registrar Nuevo Voluntario
+        {% endif %}
+    </h2>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <!-- Errores generales -->
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+                {% endif %}
+
+                <!-- Campo Nombre -->
+                <div class="mb-3">
+                    <label class="form-label">{{ form.nombre.label }}</label>
+                    {{ form.nombre }}
+                    {% for error in form.nombre.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <!-- Campo Email -->
+                <div class="mb-3">
+                    <label class="form-label">{{ form.email.label }}</label>
+                    {{ form.email }}
+                    {% for error in form.email.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <!-- Campo Teléfono -->
+                <div class="mb-3">
+                    <label class="form-label">{{ form.telefono.label }}</label>
+                    {{ form.telefono }}
+                    {% for error in form.telefono.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    {% if form.instance.pk %}
+                        Guardar Cambios
+                    {% else %}
+                        Crear Voluntario
+                    {% endif %}
+                </button>
+
+                <a href="{% url 'voluntarios:lista_voluntarios' %}" class="btn btn-secondary ms-2">Volver</a>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

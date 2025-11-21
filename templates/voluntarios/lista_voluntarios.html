@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Lista de Voluntarios</h2>
+
+    <a href="{% url 'voluntarios:crear_voluntario' %}" class="btn btn-primary mb-3">
+        + Agregar Voluntario
+    </a>
+
+    {% if voluntarios %}
+        <div class="card shadow-sm">
+            <div class="card-body p-0">
+                <table class="table mb-0 table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Fecha Registro</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for voluntario in voluntarios %}
+                            <tr>
+                                <td>{{ voluntario.nombre }}</td>
+                                <td>{{ voluntario.email }}</td>
+                                <td>{{ voluntario.telefono|default:"-" }}</td>
+                                <td>{{ voluntario.fecha_registro|date:"d/m/Y H:i" }}</td>
+                                <td>
+                                    <a href="{% url 'voluntarios:editar_voluntario' voluntario.id %}" 
+                                       class="btn btn-sm btn-warning">
+                                        Editar
+                                    </a>
+
+                                    <a href="{% url 'voluntarios:eliminar_voluntario' voluntario.id %}" 
+                                       class="btn btn-sm btn-danger ms-1">
+                                        Eliminar
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-info">No hay voluntarios registrados.</div>
+    {% endif %}
+</div>
+
+{% endblock %}
