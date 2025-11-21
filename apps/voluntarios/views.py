@@ -27,7 +27,7 @@ def editar_voluntario(request, id):
         form = VoluntarioForm(request.POST, instance=voluntario)
         if form.is_valid():
             form.save()
-            return redirect('voluntarios:lista_voluntarios', id=voluntario.id)
+            return redirect('voluntarios:lista_voluntarios')
     else:
         form = VoluntarioForm(instance=voluntario)
     return render(request, 'voluntarios/formulario.html', {'form': form})

@@ -51,17 +51,6 @@
                     {% endfor %}
                 </div>
 
-                <!-- Campo Voluntarios -->
-                <div class="mb-3">
-                    <label class="form-label">{{ form.voluntarios.label }}</label>
-                    <div class="ms-2">
-                        {{ form.voluntarios }}
-                    </div>
-                    {% for error in form.voluntarios.errors %}
-                        <div class="text-danger small">{{ error }}</div>
-                    {% endfor %}
-                </div>
-
                 <!-- Botón Guardar -->
                 <button type="submit" class="btn btn-success">
                     {% if form.instance.pk %}
