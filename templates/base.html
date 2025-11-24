@@ -27,27 +27,22 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    {% if user.is_authenticated %}
                         <ul class="navbar-nav ms-auto align-items-center">
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'index' %}">
                                     <i class="fa-solid fa-home me-1"></i> Inicio
                                 </a>
                             </li>
-                            {% if perms.eventos.view_eventos %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'eventos:lista_eventos' %}">
                                         <i class="fa-solid fa-calendar-days me-1"></i> Eventos
                                     </a>
                                 </li>
-                            {% endif %}
-                            {% if perms.voluntarios.view_voluntarios %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'voluntarios:lista_voluntarios' %}">
                                         <i class="fa-solid fa-users me-1"></i> Voluntarios
                                     </a>
                                 </li>
-                            {% endif %}
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
                                     <i class="fa fa-user-circle"></i> {{ user.username }}
@@ -59,7 +54,6 @@
                                 </ul>
                             </li>
                         </ul>
-                    {% endif %}
                 </div>
             </div>
         </nav>

@@ -25,13 +25,7 @@
                             <tr>
                                 <td>{{ evento.titulo }}</td>
                                 <td>{{ evento.fecha|date:"d/m/Y" }}</td>
-                                <td>
-                                    {% if evento.voluntarios.all %}
-                                        {{ evento.voluntarios.count }} voluntario(s)
-                                    {% else %}
-                                        -
-                                    {% endif %}
-                                </td>
+                                <td>{{ evento.voluntarios }}</td>
                                 <td>
                                     <a href="{% url 'eventos:editar_evento' evento.id %}" 
                                        class="btn btn-sm btn-warning">

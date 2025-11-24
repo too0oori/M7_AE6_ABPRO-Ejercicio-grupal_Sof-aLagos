@@ -9,7 +9,6 @@ def lista_voluntarios(request):
     voluntarios = Voluntario.objects.all()
     return render(request, 'voluntarios/lista_voluntarios.html', {'voluntarios': voluntarios})
 
-@permission_required('voluntarios.add_voluntario')
 def crear_voluntario(request):
     if request.method == 'POST':
         form = VoluntarioForm(request.POST)
@@ -20,7 +19,6 @@ def crear_voluntario(request):
         form = VoluntarioForm()
     return render(request, 'voluntarios/formulario.html', {'form': form})
 
-@permission_required('voluntarios.change_voluntario')
 def editar_voluntario(request, id):
     voluntario = Voluntario.objects.get(id=id)
     if request.method == 'POST':
@@ -32,7 +30,6 @@ def editar_voluntario(request, id):
         form = VoluntarioForm(instance=voluntario)
     return render(request, 'voluntarios/formulario.html', {'form': form})
 
-@permission_required('voluntarios.delete_voluntario')
 def eliminar_voluntario(request, id):
     voluntario = Voluntario.objects.get(id=id)
     if request.method == 'POST':

@@ -8,136 +8,66 @@
         <p class="lead mt-3 mb-4">
             Administra voluntarios, organiza eventos y genera impacto en tu comunidad
         </p>
-        {% if user.is_authenticated %}
-            {% if perms.eventos.add_eventos or perms.voluntarios.add_voluntarios %}
-                <div class="mt-4">
-                    {% if perms.eventos.add_eventos %}
-                        <a href="{% url 'eventos:crear_evento' %}" class="btn btn-light btn-lg cta-button me-2">
-                            <i class="fa-solid fa-calendar-plus me-2"></i>Crear Evento
-                        </a>
-                    {% endif %}
-                    {% if perms.voluntarios.add_voluntarios %}
-                        <a href="{% url 'voluntarios:crear_voluntario' %}" class="btn btn-outline-light btn-lg cta-button">
-                            <i class="fa-solid fa-user-plus me-2"></i>Registrar Voluntario
-                        </a>
-                    {% endif %}
-                </div>
-            {% endif %}
-        {% endif %}
+        <div class="mt-4">
+            <a href="{% url 'eventos:crear_evento' %}" class="btn btn-light btn-lg cta-button me-2">
+                <i class="fa-solid fa-calendar-plus me-2"></i>Crear Evento
+            </a>
+            <a href="{% url 'voluntarios:crear_voluntario' %}" class="btn btn-outline-light btn-lg cta-button">
+                <i class="fa-solid fa-user-plus me-2"></i>Registrar Voluntario
+            </a>
+        </div>
     </div>
 </div>
 
 <div class="container">
-    {% if user.is_authenticated %}
-        <!-- Cards de Gestión -->
-        <div class="row g-4 mb-5">
-            <!-- Card Voluntarios -->
-            {% if perms.voluntarios.view_voluntarios or perms.voluntarios.add_voluntarios %}
-                <div class="col-md-6">
-                    <div class="card feature-card shadow-sm">
-                        <div class="card-body p-4">
-                            <div class="icon-wrapper primary">
-                                <i class="fa-solid fa-users fa-2x text-white"></i>
-                            </div>
-                            <h3 class="card-title text-center mb-3">Gestión de Voluntarios</h3>
-                            <p class="card-text text-center text-muted mb-4">
-                                Administra la información de las personas que participan en tus actividades. 
-                                Mantén actualizada su información de contacto y disponibilidad.
-                            </p>
-                            <div class="d-flex justify-content-center gap-2">
-                                {% if perms.voluntarios.view_voluntarios %}
-                                    <a class="btn btn-primary action-btn" href="{% url 'voluntarios:lista_voluntarios' %}">
-                                        <i class="fa-solid fa-list me-2"></i>Ver Todos
-                                    </a>
-                                {% endif %}
-                                {% if perms.voluntarios.add_voluntarios %}
-                                    <a class="btn btn-outline-primary action-btn" href="{% url 'voluntarios:crear_voluntario' %}">
-                                        <i class="fa-solid fa-user-plus me-2"></i>Registrar
-                                    </a>
-                                {% endif %}
-                            </div>
-                        </div>
+    <!-- Cards de Gestión -->
+    <div class="row g-4 mb-5">
+        <!-- Card Voluntarios -->
+        <div class="col-md-6">
+            <div class="card feature-card shadow-sm">
+                <div class="card-body p-4">
+                    <div class="icon-wrapper primary">
+                        <i class="fa-solid fa-users fa-2x text-white"></i>
                     </div>
-                </div>
-            {% endif %}
-
-            <!-- Card Eventos -->
-            {% if perms.eventos.view_eventos or perms.eventos.add_eventos %}
-                <div class="col-md-6">
-                    <div class="card feature-card shadow-sm">
-                        <div class="card-body p-4">
-                            <div class="icon-wrapper success">
-                                <i class="fa-solid fa-calendar-days fa-2x text-white"></i>
-                            </div>
-                            <h3 class="card-title text-center mb-3">Gestión de Eventos</h3>
-                            <p class="card-text text-center text-muted mb-4">
-                                Organiza eventos comunitarios, define fechas, ubicaciones y asigna 
-                                voluntarios para cada actividad de forma simple y efectiva.
-                            </p>
-                            <div class="d-flex justify-content-center gap-2">
-                                {% if perms.eventos.view_eventos %}
-                                    <a class="btn btn-success action-btn" href="{% url 'eventos:lista_eventos' %}">
-                                        <i class="fa-solid fa-list me-2"></i>Ver Todos
-                                    </a>
-                                {% endif %}
-                                {% if perms.eventos.add_eventos %}
-                                    <a class="btn btn-outline-success action-btn" href="{% url 'eventos:crear_evento' %}">
-                                        <i class="fa-solid fa-calendar-plus me-2"></i>Crear Evento
-                                    </a>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
-        </div>
-
-        <!-- Sección Informativa -->
-        <div class="info-section">
-            <div class="container">
-                <h2 class="text-center mb-5">¿Cómo funciona?</h2>
-                <div class="row g-4">
-                    <div class="col-md-4">
-                        <div class="info-card">
-                            <i class="fa-solid fa-user-plus"></i>
-                            <h5>1. Registra Voluntarios</h5>
-                            <p class="text-muted">Mantén una base de datos actualizada de todas las personas interesadas en participar</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="info-card">
-                            <i class="fa-solid fa-calendar-plus"></i>
-                            <h5>2. Crea Eventos</h5>
-                            <p class="text-muted">Planifica actividades con fechas, ubicaciones y descripciones detalladas</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="info-card">
-                            <i class="fa-solid fa-users-gear"></i>
-                            <h5>3. Asigna y Gestiona</h5>
-                            <p class="text-muted">Coordina voluntarios para cada evento y mantén un seguimiento efectivo</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% else %}
-        <!-- Mensaje para usuarios no autenticados -->
-        <div class="row justify-content-center">
-            <div class="col-md-8 text-center">
-                <div class="card shadow-sm p-5">
-                    <i class="fa-solid fa-lock fa-3x text-muted mb-3"></i>
-                    <h3 class="mb-3">Acceso Restringido</h3>
-                    <p class="text-muted mb-4">
-                        Por favor inicia sesión para acceder a la plataforma de gestión de voluntarios y eventos.
+                    <h3 class="card-title text-center mb-3">Gestión de Voluntarios</h3>
+                    <p class="card-text text-center text-muted mb-4">
+                        Administra la información de las personas que participan en tus actividades.
                     </p>
-                    <a href="#" class="btn btn-primary btn-lg">
-                        <i class="fa-solid fa-right-to-bracket me-2"></i>Iniciar Sesión
-                    </a>
+                    <div class="d-flex justify-content-center gap-2">
+                        <a class="btn btn-primary action-btn" href="{% url 'voluntarios:lista_voluntarios' %}">
+                            <i class="fa-solid fa-list me-2"></i>Ver Todos
+                        </a>
+                        <a class="btn btn-outline-primary action-btn" href="{% url 'voluntarios:crear_voluntario' %}">
+                            <i class="fa-solid fa-user-plus me-2"></i>Registrar
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    {% endif %}
+
+        <!-- Card Eventos -->
+        <div class="col-md-6">
+            <div class="card feature-card shadow-sm">
+                <div class="card-body p-4">
+                    <div class="icon-wrapper success">
+                        <i class="fa-solid fa-calendar-days fa-2x text-white"></i>
+                    </div>
+                    <h3 class="card-title text-center mb-3">Gestión de Eventos</h3>
+                    <p class="card-text text-center text-muted mb-4">
+                        Organiza eventos comunitarios y asigna voluntarios.
+                    </p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <a class="btn btn-success action-btn" href="{% url 'eventos:lista_eventos' %}">
+                            <i class="fa-solid fa-list me-2"></i>Ver Todos
+                        </a>
+                        <a class="btn btn-outline-success action-btn" href="{% url 'eventos:crear_evento' %}">
+                            <i class="fa-solid fa-calendar-plus me-2"></i>Crear Evento
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

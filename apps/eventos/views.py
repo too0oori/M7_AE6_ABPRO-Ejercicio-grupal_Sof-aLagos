@@ -7,7 +7,7 @@ def lista_eventos(request):
     eventos = Evento.objects.all()
     return render(request, 'eventos/lista_eventos.html', {'eventos': eventos})
 
-@permission_required('eventos.add_evento')
+
 def crear_evento(request):
     if request.method == 'POST':
         form = EventoForm(request.POST)
@@ -18,7 +18,7 @@ def crear_evento(request):
         form = EventoForm()
     return render(request, 'eventos/formulario.html', {'form': form})
 
-@permission_required('eventos.change_evento')
+
 def editar_evento(request, id):
     evento = Evento.objects.get(id=id)
     if request.method == 'POST':
@@ -30,7 +30,7 @@ def editar_evento(request, id):
         form = EventoForm(instance=evento)
     return render(request, 'eventos/formulario.html', {'form': form})
 
-@permission_required('eventos.delete_evento')
+
 def eliminar_evento(request, id):
     evento = Evento.objects.get(id=id)
     if request.method == 'POST':
