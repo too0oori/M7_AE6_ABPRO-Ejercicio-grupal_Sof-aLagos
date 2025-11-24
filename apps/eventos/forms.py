@@ -5,7 +5,7 @@ from apps.eventos.models import Evento
 class EventoForm(forms.ModelForm):
     class Meta:
         model = Evento
-        fields = ['titulo', 'descripcion', 'fecha', 'voluntarios']
+        fields = ['titulo', 'descripcion', 'fecha']
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el título del evento.'}),
             'descripcion': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ingrese la descripción del evento.'}),
@@ -29,6 +29,4 @@ class EventoForm(forms.ModelForm):
             },
         }
     
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['voluntarios'].queryset = Voluntario.objects.all()
+    

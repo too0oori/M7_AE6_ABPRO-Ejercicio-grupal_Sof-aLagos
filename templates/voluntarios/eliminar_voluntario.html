@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-danger">Eliminar Voluntario</h2>
+
+    <div class="card shadow-sm border-danger">
+        <div class="card-body">
+            <div class="alert alert-warning" role="alert">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                <strong>¡Atención!</strong> Estás a punto de eliminar el siguiente voluntario. Esta acción no se puede deshacer.
+            </div>
+
+            <div class="mb-4">
+                <h5>Detalles del Voluntario:</h5>
+                <ul class="list-unstyled ms-3">
+                    <li><strong>Nombre:</strong> {{ voluntario.nombre }}</li>
+                    <li><strong>Email:</strong> {{ voluntario.email }}</li>
+                    <li><strong>Teléfono:</strong> {{ voluntario.telefono|default:"-" }}</li>
+                    <li><strong>Fecha de Registro:</strong> {{ voluntario.fecha_registro|date:"d/m/Y H:i" }}</li>
+                </ul>
+            </div>
+
+            <form method="POST">
+                {% csrf_token %}
+                
+                <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-trash"></i> Confirmar Eliminación
+                </button>
+
+                <a href="{% url 'voluntarios:lista_voluntarios' %}" class="btn btn-secondary ms-2">
+                    <i class="bi bi-arrow-left"></i> Cancelar
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
