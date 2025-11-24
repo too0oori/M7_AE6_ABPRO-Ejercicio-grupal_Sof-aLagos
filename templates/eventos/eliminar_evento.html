@@ -2,12 +2,15 @@
 {% block content %}
 
 <div class="container mt-5">
-    <h2 class="mb-4 text-danger">Eliminar Evento</h2>
+    <h2 class="mb-4 text-danger">
+        <i class="fa-solid fa-trash-alt me-2"></i>
+        Eliminar Evento
+    </h2>
 
     <div class="card shadow-sm border-danger">
         <div class="card-body">
             <div class="alert alert-warning" role="alert">
-                <i class="bi bi-exclamation-triangle-fill"></i>
+                <i class="fa-solid fa-exclamation-triangle me-2"></i>
                 <strong>¡Atención!</strong> Estás a punto de eliminar el siguiente evento. Esta acción no se puede deshacer.
             </div>
 
@@ -17,7 +20,18 @@
                     <li><strong>Título:</strong> {{ evento.titulo }}</li>
                     <li><strong>Descripción:</strong> {{ evento.descripcion }}</li>
                     <li><strong>Fecha:</strong> {{ evento.fecha|date:"d/m/Y" }}</li>
-                    <li><strong>Voluntarios:</strong> {{ evento.voluntarios }}</li>
+                    <li>
+                        <strong>Voluntarios Asignados:</strong>
+                        {% if evento.voluntarios.count > 0 %}
+                            <ul>
+                                {% for vol in evento.voluntarios.all %}
+                                    <li>{{ vol.nombre }} ({{ vol.email }})</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <span class="text-muted">Sin voluntarios</span>
+                        {% endif %}
+                    </li>
                 </ul>
             </div>
 
@@ -25,11 +39,11 @@
                 {% csrf_token %}
                 
                 <button type="submit" class="btn btn-danger">
-                    <i class="bi bi-trash"></i> Confirmar Eliminación
+                    <i class="fa-solid fa-trash me-2"></i>Confirmar Eliminación
                 </button>
 
                 <a href="{% url 'eventos:lista_eventos' %}" class="btn btn-secondary ms-2">
-                    <i class="bi bi-arrow-left"></i> Cancelar
+                    <i class="fa-solid fa-arrow-left me-2"></i>Cancelar
                 </a>
             </form>
         </div>

@@ -51,8 +51,21 @@
                     {% endfor %}
                 </div>
 
+                <!-- Campo Voluntarios -->
+                <div class="mb-3">
+                    <label class="form-label">{{ form.voluntarios.label }}</label>
+                    <div class="border rounded p-3" style="max-height: 200px; overflow-y: auto;">
+                        {{ form.voluntarios }}
+                    </div>
+                    {% for error in form.voluntarios.errors %}
+                        <div class="text-danger small">{{ error }}</div>
+                    {% endfor %}
+                    <small class="text-muted">Selecciona los voluntarios que participarán en este evento.</small>
+                </div>
+
                 <!-- Botón Guardar -->
                 <button type="submit" class="btn btn-success">
+                    <i class="fa-solid fa-save me-2"></i>
                     {% if form.instance.pk %}
                         Guardar Cambios
                     {% else %}
@@ -62,6 +75,7 @@
 
                 <!-- Botón Volver -->
                 <a href="{% url 'eventos:lista_eventos' %}" class="btn btn-secondary ms-2">
+                    <i class="fa-solid fa-arrow-left me-2"></i>
                     Volver
                 </a>
 

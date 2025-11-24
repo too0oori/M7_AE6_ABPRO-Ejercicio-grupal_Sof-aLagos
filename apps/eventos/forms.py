@@ -6,15 +6,18 @@ class EventoForm(forms.ModelForm):
     class Meta:
         model = Evento
         fields = ['titulo', 'descripcion', 'fecha']
+        fields = ['titulo', 'descripcion', 'fecha', 'voluntarios']
         widgets = {
-            'titulo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el título del evento.'}),
-            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ingrese la descripción del evento.'}),
+            'titulo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el título del evento.'}),
+            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ingrese la descripción del evento.', 'rows': 4}),
             'fecha': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'voluntarios': forms.CheckboxSelectMultiple(),
         }
         labels = {
-            'titulo': 'Título',
-            'descripcion': 'Descripción',
+            'titulo': 'Título',
+            'descripcion': 'Descripción',
             'fecha': 'Fecha',
+            'voluntarios': 'Voluntarios Asignados',
         }
 
         error_messages = {
@@ -28,5 +31,4 @@ class EventoForm(forms.ModelForm):
                 'required': 'La fecha del evento es obligatoria.',
             },
         }
-    
     

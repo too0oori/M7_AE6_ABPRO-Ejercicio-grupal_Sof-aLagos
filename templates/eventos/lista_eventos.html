@@ -2,11 +2,15 @@
 {% block content %}
 
 <div class="container mt-5">
-    <h2 class="mb-4">Lista de Eventos</h2>
-
-    <a href="{% url 'eventos:crear_evento' %}" class="btn btn-success mb-3">
-        + Crear Evento
-    </a>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">
+            <i class="fa-solid fa-calendar-days me-2"></i>
+            Lista de Eventos
+        </h2>
+        <a href="{% url 'eventos:crear_evento' %}" class="btn btn-success">
+            <i class="fa-solid fa-plus me-2"></i>Crear Evento
+        </a>
+    </div>
 
     {% if eventos %}
         <div class="card shadow-sm">
@@ -17,24 +21,47 @@
                             <th>Título</th>
                             <th>Fecha</th>
                             <th>Voluntarios Asignados</th>
-                            <th>Acciones</th>
+                            <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for evento in eventos %}
                             <tr>
-                                <td>{{ evento.titulo }}</td>
-                                <td>{{ evento.fecha|date:"d/m/Y" }}</td>
-                                <td>{{ evento.voluntarios }}</td>
                                 <td>
+                                    <strong>{{ evento.titulo }}</strong>
+                                    <br>
+                                    <small class="text-muted">{{ evento.descripcion|truncatewords:10 }}</small>
+                                </td>
+                                <td>{{ evento.fecha|date:"d/m/Y" }}</td>
+                                <td>
+                                    {% if evento.voluntarios.count > 0 %}
+                                        <span class="badge bg-primary">
+                                            {{ evento.voluntarios.count }} voluntario(s)
+                                        </span>
+                                        <button class="btn btn-sm btn-outline-info ms-2" type="button" 
+                                                data-bs-toggle="collapse" 
+                                                data-bs-target="#voluntarios-{{ evento.id }}">
+                                            <i class="fa-solid fa-eye"></i> Ver
+                                        </button>
+                                        <div class="collapse mt-2" id="voluntarios-{{ evento.id }}">
+                                            <ul class="list-unstyled small">
+                                                {% for vol in evento.voluntarios.all %}
+                                                    <li><i class="fa-solid fa-user me-1"></i>{{ vol.nombre }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    {% else %}
+                                        <span class="text-muted">Sin voluntarios</span>
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">
                                     <a href="{% url 'eventos:editar_evento' evento.id %}" 
                                        class="btn btn-sm btn-warning">
-                                        Editar
+                                        <i class="fa-solid fa-edit"></i> Editar
                                     </a>
-
                                     <a href="{% url 'eventos:eliminar_evento' evento.id %}" 
                                        class="btn btn-sm btn-danger ms-1">
-                                        Eliminar
+                                        <i class="fa-solid fa-trash"></i> Eliminar
                                     </a>
                                 </td>
                             </tr>
@@ -45,7 +72,10 @@
         </div>
 
     {% else %}
-        <div class="alert alert-info">No hay eventos disponibles.</div>
+        <div class="alert alert-info">
+            <i class="fa-solid fa-info-circle me-2"></i>
+            No hay eventos disponibles. ¡Crea el primero!
+        </div>
     {% endif %}
 
 </div>

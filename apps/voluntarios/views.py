@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from apps.voluntarios.models import Voluntario
 from apps.voluntarios.forms import VoluntarioForm
-from django.contrib.auth.decorators import permission_required
+
 
 # Create your views here.
 

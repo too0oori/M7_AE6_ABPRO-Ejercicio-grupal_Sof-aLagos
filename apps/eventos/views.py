@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from apps.eventos.models import Evento
 from apps.eventos.forms import EventoForm
-from django.contrib.auth.decorators import permission_required
+
 # Create your views here.
 def lista_eventos(request):
     eventos = Evento.objects.all()

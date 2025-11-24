@@ -3,7 +3,7 @@ from django.db import models
 class Evento(models.Model):
     titulo = models.CharField(max_length=100)
     descripcion = models.TextField()
-    voluntarios = models.IntegerField(default=0)
+    voluntarios = models.ManyToManyField('voluntarios.Voluntario', related_name='eventos', blank=True)
     fecha = models.DateField()
 
     class Meta:
